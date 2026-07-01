@@ -168,10 +168,17 @@ public class DictionaryService implements DictionaryOperation {
 
     @Override
     public void export(String filePath) {
+        if (words.isEmpty()) {
+            System.out.println("Dictionary is empty. Nothing to export.");
+            return;
+        }
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
             int total = words.size();
             int current = 0;
+
+            System.out.print("Exporting ");
 
             for (Word word : words) {
 
@@ -182,18 +189,18 @@ public class DictionaryService implements DictionaryOperation {
 
                 current++;
                 int percent = (current * 100) / total;
-                if (percent % 10 == 0) {
-                    System.out.print(percent + "%.");
+
+                // In progress mỗi 10%
+                if (percent % 10 == 0 || percent == 100) {
+                    System.out.print(percent + "%..");
                 }
             }
 
             System.out.println("Done!");
-            System.out.println("Export successfully!");
+            System.out.println("Export successfully to: " + filePath);
 
         } catch (IOException e) {
-
             System.out.println("Export failed: " + e.getMessage());
-
         }
     }
 }

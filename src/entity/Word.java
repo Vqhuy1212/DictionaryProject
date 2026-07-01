@@ -1,8 +1,11 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Word {
+public class Word implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     // Từ khóa
     private String keyword;

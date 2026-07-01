@@ -1,6 +1,10 @@
 package entity;
 
-public class Pronunciation implements DictionaryEntry {
+import java.io.Serializable;
+
+public class Pronunciation implements DictionaryEntry, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     // Phiên âm IPA của từ
     private String ipa;
@@ -32,6 +36,6 @@ public class Pronunciation implements DictionaryEntry {
      */
     @Override
     public String toString() {
-        return ipa;
+        return "/" + ipa + "/";
     }
 }

@@ -1,6 +1,10 @@
 package entity;
 
-public abstract class Definition implements DictionaryEntry{
+import java.io.Serializable;
+
+public abstract class Definition implements DictionaryEntry, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     // Nghĩa của từ
     protected String meaning;
@@ -59,12 +63,12 @@ public abstract class Definition implements DictionaryEntry{
 
         builder.append("- ").append(meaning);
 
-        if (!sentence.isEmpty()) {
+        if (sentence != null && !sentence.isEmpty()) {
 
             builder.append("\n= ")
                     .append(sentence);
 
-            if (!sentenceMeaning.isEmpty()) {
+            if (sentenceMeaning != null && !sentenceMeaning.isEmpty()) {
 
                 builder.append(" + ")
                         .append(sentenceMeaning);

@@ -1,27 +1,35 @@
 package factory;
 
+import entity.Definition;
 import entity.DictionaryEntry;
 import entity.VerbDefinition;
 
 import java.util.List;
 
+/**
+ * Factory để tạo VerbDefinition từ danh sách tham số
+ */
 public class VerbDefinitionFactory implements DefinitionFactory {
 
+    /**
+     * Tạo VerbDefinition từ params
+     * @param params: [meaning, sentence, sentenceMeaning]
+     */
     @Override
     public DictionaryEntry create(List<String> params) {
 
-        String meaning = getOrDefault(params, 0, "");
-        String sentence = getOrDefault(params, 1, "");
-        String sentenceMeaning = getOrDefault(params, 2, "");
-        String verbForm = getOrDefault(params, 3, "");
-        String tense = getOrDefault(params, 4, "");
+        if (params == null || params.size() < 1) {
+            return null;
+        }
 
-        return new VerbDefinition(meaning, sentence, sentenceMeaning, verbForm, tense);
-    }
+        String meaning = params.get(0);
+        String sentence = params.size() > 1 ? params.get(1) : "";
+        String sentenceMeaning = params.size() > 2 ? params.get(2) : "";
 
-    private String getOrDefault(List<String> params, int index, String defaultValue) {
-        return (index < params.size() && params.get(index) != null)
-                ? params.get(index)
-                : defaultValue;
+        if (meaning == null || meaning.trim().isEmpty()) {
+            return null;
+        }
+
+        return new VerbDefinition(meaning, sentence, sentenceMeaning);
     }
 }

@@ -1,26 +1,35 @@
 package factory;
 
+import entity.Definition;
 import entity.DictionaryEntry;
 import entity.NounDefinition;
 
 import java.util.List;
 
+/**
+ * Factory để tạo NounDefinition từ danh sách tham số
+ */
 public class NounDefinitionFactory implements DefinitionFactory {
 
+    /**
+     * Tạo NounDefinition từ params
+     * @param params: [meaning, sentence, sentenceMeaning]
+     */
     @Override
     public DictionaryEntry create(List<String> params) {
 
-        String meaning = getOrDefault(params, 0, "");
-        String sentence = getOrDefault(params, 1, "");
-        String sentenceMeaning = getOrDefault(params, 2, "");
-        String pluralForm = getOrDefault(params, 3, "");
+        if (params == null || params.size() < 1) {
+            return null;
+        }
 
-        return new NounDefinition(meaning, sentence, sentenceMeaning, pluralForm);
-    }
+        String meaning = params.get(0);
+        String sentence = params.size() > 1 ? params.get(1) : "";
+        String sentenceMeaning = params.size() > 2 ? params.get(2) : "";
 
-    private String getOrDefault(List<String> params, int index, String defaultValue) {
-        return (index < params.size() && params.get(index) != null)
-                ? params.get(index)
-                : defaultValue;
+        if (meaning == null || meaning.trim().isEmpty()) {
+            return null;
+        }
+
+        return new NounDefinition(meaning, sentence, sentenceMeaning);
     }
 }

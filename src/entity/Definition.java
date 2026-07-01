@@ -1,6 +1,6 @@
 package entity;
 
-public abstract class Definition {
+public abstract class Definition implements DictionaryEntry{
 
     // Nghĩa của từ
     protected String meaning;

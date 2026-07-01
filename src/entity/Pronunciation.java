@@ -1,6 +1,6 @@
 package entity;
 
-public class Pronunciation {
+public class Pronunciation implements DictionaryEntry {
 
     // Phiên âm IPA của từ
     private String ipa;
